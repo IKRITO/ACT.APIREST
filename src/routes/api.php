@@ -13,3 +13,6 @@ use App\Http\Controllers\AsistenteController;
 
 Route::apiResource('ponentes', PonenteController::class);
 Route::apiResource('asistentes', AsistenteController::class);
+Route::middleware('auth:api')->get('/protegido', function () {
+    return response()->json(['ok' => 'autenticado']);
+});

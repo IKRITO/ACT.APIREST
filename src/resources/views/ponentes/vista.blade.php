@@ -20,6 +20,7 @@
             <th> Nombre</th>
             <th> Especialidad</th>
             <th> Biografía</th>
+            <th> Acción</th>
         </tr>
         </thead>
         <tbody>
@@ -28,11 +29,35 @@
                 <td>{{$p->nombre}}</td>
                 <td>{{$p->especialidad}}</td>
                 <td>{{$p->biografia}}</td>
+                <td>
+                    <form action="{{route('ponentes.destroy',$p->id)}}" method="POST" onsubmit="return confirm('¿Seguro que desea eliminar a este ponente?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
         </table>
         <hr class="my-4">
+
+        <!--Formulario para crear ponente-->
+        <form action="{{url('/ponentes-vista')}}" mothod="POST" class="mb-4">
+            @csrf
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                </div>
+                 <div class="col-md-4">
+                    <input type="text" name="especialidad" class="form-control" placeholder="Especialidad">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="biografia" class="form-control" placeholder="Biografía">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success mt-2">Agregar ponente</button>
+        </form>
     </div>
 </body>
 </html>
